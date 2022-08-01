@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/task_track_fragment">
+
+    <fragment
+        android:id="@+id/task_track_fragment"
+        android:name="com.example.todolist.taskTrack.TaskTrackFragment"
+        android:label="taskTrack"
+        tools:layout="@layout/fragment_task_track">
+        <action
+            android:id="@+id/action_task_track_fragment_to_add_tasks_fragment"
+            app:destination="@id/add_tasks_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_right"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_tasks_fragment"
+        android:name="com.example.todolist.addTasks.AddTasksFragment"
+        android:label="addTasks"
+        tools:layout="@layout/fragment_add_tasks">
+        <action
+            android:id="@+id/action_add_tasks_fragment_to_task_track_fragment"
+            app:destination="@id/task_track_fragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/task_track_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
