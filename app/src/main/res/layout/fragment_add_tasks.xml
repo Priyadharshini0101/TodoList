@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
+            name="todolist"
+            type="com.example.todolist.database.TodoList" />
+        <variable
             name="addTasksViewModel"
             type="com.example.todolist.addTasks.AddTasksViewModel" />
     </data>
@@ -28,6 +31,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@={todolist.taskName}"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +51,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="@={todolist.initialValue}"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/finalValue"
@@ -65,7 +70,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="@={todolist.finalValue}" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -75,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="40dp"
             android:text="@string/save_task"
+            android:onClick="@{()->addTasksViewModel.submitNewTask(todolist.todoId,todolist.taskName,todolist.initialValue,todolist.finalValue)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/finalValue"

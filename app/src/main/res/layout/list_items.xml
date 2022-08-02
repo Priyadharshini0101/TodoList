@@ -3,6 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <variable
+            name="clickListener1"
+            type="com.example.todolist.taskTrack.TaskTrackAdapter" />
+        <variable
+            name="clickListener2"
+            type="com.example.todolist.taskTrack.TaskTrackAdapter" />
+        <variable
+            name="clickListener3"
+            type="com.example.todolist.taskTrack.TaskTrackAdapter" />
+        <variable
+            name="data"
+            type="com.example.todolist.database.TodoList" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -45,6 +57,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
+                app:taskName="@{data.taskName}"
                 app:layout_constraintStart_toStartOf="@id/left_well"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/progressValue"
@@ -57,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="8dp"
+                app:progressValue="@{data}"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textSize="20sp"
@@ -72,6 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 app:trackThickness="25dp"
+                app:progressBar="@{data}"
                 android:layout_margin="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/left_well"
