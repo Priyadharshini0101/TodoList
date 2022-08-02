@@ -6,4 +6,5 @@
     <string name="save_task">Save Task</string>
     <string name="click_to_add_new_tasks">Click to add new tasks</string>
     <string name="list_of_your_tasks">List of your tasks</string>
+    <string name="add_tasks">Add Task</string>
 </resources>

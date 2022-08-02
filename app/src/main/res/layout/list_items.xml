@@ -4,14 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="clickListener1"
+            name="TaskClicKListener"
             type="com.example.todolist.taskTrack.TaskTrackAdapter" />
         <variable
-            name="clickListener2"
+            name="AddProgressListener"
             type="com.example.todolist.taskTrack.TaskTrackAdapter" />
         <variable
-            name="clickListener3"
+            name="MinusProgressListener"
             type="com.example.todolist.taskTrack.TaskTrackAdapter" />
+        <variable
+            name="DeleteTaskListener"
+            type="com.example.todolist.taskTrack.TaskTrackAdapter" />
+
         <variable
             name="data"
             type="com.example.todolist.database.TodoList" />

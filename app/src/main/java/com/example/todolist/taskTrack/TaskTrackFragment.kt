@@ -37,8 +37,6 @@ class TaskTrackFragment : Fragment() {
         binding.taskTrackViewModel=taskTrackViewModel
 
         binding.lifecycleOwner = this
-
-        //Initialize the adapter onClick event happen on each object (lamba function)
         val adapter=TaskTrackAdapter()
         binding.recyclerView.adapter=adapter
 
@@ -51,8 +49,8 @@ class TaskTrackFragment : Fragment() {
         })
 
 
-        taskTrackViewModel.navigateToAddTasks.observe(viewLifecycleOwner, Observer{ it ->
-            if(it){
+        taskTrackViewModel.navigateToAddTasks.observe(viewLifecycleOwner, Observer{
+            if(it==true){
              this.findNavController().navigate(TaskTrackFragmentDirections.actionTaskTrackFragmentToAddTasksFragment())
                 taskTrackViewModel.doneNavigateToAddTasks()
             }

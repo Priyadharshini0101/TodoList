@@ -11,8 +11,8 @@ class AddTasksViewModelFactory(private val dataSource: TodoDatabaseDao,
                                private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TaskTrackViewModel::class.java)) {
-            return TaskTrackViewModel(dataSource,application) as T
+        if (modelClass.isAssignableFrom(AddTasksViewModel::class.java)) {
+            return AddTasksViewModel(dataSource,application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

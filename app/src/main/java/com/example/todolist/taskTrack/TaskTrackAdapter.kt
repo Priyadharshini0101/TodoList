@@ -38,6 +38,21 @@ class TaskTrackAdapter: ListAdapter<TodoList, TaskTrackAdapter.ViewHolder>(TaskT
     }
 }
 
+class TaskClickListener(val clickListener: (todoId:Long) -> Unit){
+    fun onClick(model: TodoList)=clickListener(model.todoId)
+}
+
+class AddProgressListener(val clickListener: (todoId:Long) -> Unit){
+    fun onClick(model: TodoList)=clickListener(model.todoId)
+}
+
+class TListener(val clickListener: (todoId:Long) -> Unit){
+    fun onClick(model: TodoList)=clickListener(model.todoId)
+}
+
+class DeleteTaskListener(val clickListener: (todoId:Long) -> Unit){
+    fun onClick(model: TodoList)=clickListener(model.todoId)
+}
 class TaskTrackDiffCallback : DiffUtil.ItemCallback<TodoList>() {
     override fun areItemsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
         return oldItem.todoId == newItem.todoId

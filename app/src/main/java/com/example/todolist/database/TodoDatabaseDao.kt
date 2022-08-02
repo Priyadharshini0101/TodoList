@@ -17,8 +17,8 @@ interface TodoDatabaseDao {
     @Query("SELECT * from todo_list_table WHERE todoId=:key")
     suspend fun get(key: Long):TodoList?
 
-    @Query("DELETE FROM todo_list_table WHERE todoId=:key")
-    suspend fun delete(key:Long) :TodoList?
+//    @Query("DELETE FROM todo_list_table WHERE todoId=:key")
+//    suspend fun delete(key:Long) :TodoList?
 
     @Query("SELECT * from todo_list_table")
     fun getAllTodo():LiveData<List<TodoList>>
