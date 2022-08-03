@@ -15,7 +15,6 @@
             app:destination="@id/add_tasks_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:popEnterAnim="@anim/slide_in_right"/>
-
     </fragment>
 
     <fragment

@@ -7,8 +7,7 @@ import com.example.todolist.database.TodoDatabaseDao
 import com.example.todolist.taskTrack.TaskTrackViewModel
 
 
-class AddTasksViewModelFactory(private val dataSource: TodoDatabaseDao,
-                               private val application: Application) : ViewModelProvider.Factory {
+class AddTasksViewModelFactory(private val dataSource: TodoDatabaseDao, private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AddTasksViewModel::class.java)) {

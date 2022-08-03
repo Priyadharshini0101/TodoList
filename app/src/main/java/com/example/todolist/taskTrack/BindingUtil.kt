@@ -5,10 +5,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.todolist.database.TodoList
 import com.google.android.material.progressindicator.LinearProgressIndicator
-import kotlin.math.max
 
-//Other way of binding the data
-//To bind the data with the function so that item takes the text value
 @BindingAdapter("taskName")
 fun TextView.setTaskName(item: String?){
     item?.let{
@@ -23,7 +20,6 @@ fun TextView.setProgressValue(item:TodoList?){
         text= item.initialValue + " / " +item.finalValue
     }
 }
-
 
 @BindingAdapter("progressBar")
 fun LinearProgressIndicator.setProgressBarRange(item:TodoList?){

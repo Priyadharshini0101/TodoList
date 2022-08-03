@@ -1,7 +1,6 @@
 package com.example.todolist.taskTrack
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,7 +27,6 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
     val updateTodoId: LiveData<String>
         get()=_updateTodoId
 
-
     fun navigateToAddTasks(){
         _navigateToAddTasks.value=true
     }
@@ -42,6 +40,7 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
             database.delete(todoList)
         }
     }
+
     fun deleteTodo(todoList:TodoList){
         viewModelScope.launch {
             delete(todoList)
@@ -54,6 +53,7 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
             database.update(todoList)
         }
     }
+
     fun addProgress(todoList:TodoList){
             viewModelScope.launch {
                 val str=todoList.initialValue.trim()
@@ -70,7 +70,6 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
                 }else{
                     _updateTodoId.value="You have completed the task"
                 }
-
             }
     }
 
@@ -78,9 +77,6 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
         viewModelScope.launch {
             val str=todoList.initialValue.trim()
             var initial =str.toInt()
-
-            val str1=todoList.finalValue.trim()
-            val final=str1.toInt()
 
             if(initial>0) {
                 initial-=1
@@ -90,10 +86,6 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
             }else{
                 _updateTodoId.value="You have not done any task yet"
             }
-
         }
     }
-
-
-
 }

@@ -22,10 +22,8 @@ class TaskTrackAdapter(val clickListener1:TaskClickListener,val clickListener2:A
         return ViewHolder.from(parent)
     }
 
-
     class ViewHolder private constructor(val binding: ListItemsBinding)
         : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: TodoList,clickListener1: TaskClickListener,clickListener2: AddProgressListener,clickListener3: MinusProgressListener,clickListener4: DeleteTaskListener) {
             binding.data=item
             binding.taskClicKListener=clickListener1
@@ -60,6 +58,7 @@ class MinusProgressListener(val clickListener: (todoList:TodoList) -> Unit){
 class DeleteTaskListener(val clickListener: (todoList:TodoList) -> Unit){
     fun onClick(todo: TodoList)=clickListener(todo)
 }
+
 class TaskTrackDiffCallback : DiffUtil.ItemCallback<TodoList>() {
     override fun areItemsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
         return oldItem.todoId == newItem.todoId

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,15 +18,15 @@ import com.example.todolist.R
 import com.example.todolist.database.TodoDatabase
 import com.example.todolist.databinding.FragmentTaskTrackBinding
 
-
 class TaskTrackFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding:FragmentTaskTrackBinding =DataBindingUtil.inflate(inflater, R.layout.fragment_task_track, container, false)
+
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.app_name)
 
         val application= requireNotNull(this.activity).application
 
@@ -36,8 +37,8 @@ class TaskTrackFragment : Fragment() {
         val taskTrackViewModel = ViewModelProvider(this, viewModelFactory).get(TaskTrackViewModel::class.java)
 
         binding.taskTrackViewModel=taskTrackViewModel
-
         binding.lifecycleOwner = this
+
         val adapter=TaskTrackAdapter(TaskClickListener{ id,id1->
                        if(id.visibility== View.VISIBLE ){
                            TransitionManager.beginDelayedTransition(id1, AutoTransition())

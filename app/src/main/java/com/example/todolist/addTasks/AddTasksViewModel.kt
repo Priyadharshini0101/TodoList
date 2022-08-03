@@ -36,7 +36,6 @@ class AddTasksViewModel(val database: TodoDatabaseDao, application: Application)
             val todo=TodoList(id,taskName,initialValue,finalValue)
             insert(todo)
             _inserted.value=true
-
           }
         }
     }
@@ -48,6 +47,4 @@ class AddTasksViewModel(val database: TodoDatabaseDao, application: Application)
     fun alertDone(){
         _alert.value=null
     }
-
-
 }
