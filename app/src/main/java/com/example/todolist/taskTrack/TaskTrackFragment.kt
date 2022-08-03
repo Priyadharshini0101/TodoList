@@ -39,14 +39,14 @@ class TaskTrackFragment : Fragment() {
         binding.taskTrackViewModel=taskTrackViewModel
 
         binding.lifecycleOwner = this
-        val adapter=TaskTrackAdapter(TaskClickListener{ id->
-//                       if(id.visibility== View.VISIBLE ){
-//                           TransitionManager.beginDelayedTransition(id1, AutoTransition())
-//                           id.setVisibility(View.GONE)
-//                       }else{
-//                           TransitionManager.beginDelayedTransition(id1, AutoTransition())
-//                           id.setVisibility(View.VISIBLE)
-//                       }
+        val adapter=TaskTrackAdapter(TaskClickListener{ id,id1->
+                       if(id.visibility== View.VISIBLE ){
+                           TransitionManager.beginDelayedTransition(id1, AutoTransition())
+                           id.setVisibility(View.GONE)
+                       }else{
+                           TransitionManager.beginDelayedTransition(id1, AutoTransition())
+                           id.setVisibility(View.VISIBLE)
+                       }
         },
         AddProgressListener{ initialValue ->
 

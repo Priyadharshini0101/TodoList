@@ -45,13 +45,13 @@ class TaskTrackAdapter(val clickListener1:TaskClickListener,val clickListener2:A
     }
 }
 
-//class TaskClickListener(val clickListener: (view: ViewGroup,view1:ViewGroup) -> Unit){
-//    fun onClick(view: ViewGroup,view1: ViewGroup)=clickListener(view,view1)
-//}
-
-class TaskClickListener(val clickListener: (todoId:TodoList) -> Unit){
-    fun onClick(todoId: TodoList)=clickListener(todoId)
+class TaskClickListener(val clickListener: (view: ViewGroup,view1:ViewGroup) -> Unit){
+    fun onClick(view: ViewGroup,view1: ViewGroup)=clickListener(view,view1)
 }
+
+//class TaskClickListener(val clickListener: (todoId:TodoList) -> Unit){
+//    fun onClick(todoId: TodoList)=clickListener(todoId)
+//}
 class AddProgressListener(val clickListener: (initialValue:String) -> Unit){
     fun onClick(model: TodoList)=clickListener(model.initialValue)
 }

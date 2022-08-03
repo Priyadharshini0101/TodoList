@@ -29,7 +29,7 @@
         app:cardElevation="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:onClick="@{()-> taskClicKListener.onClick(data)}">
+        android:onClick="@{()-> taskClicKListener.onClick(hidden,card)}">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
