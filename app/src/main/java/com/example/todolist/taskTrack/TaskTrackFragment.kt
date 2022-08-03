@@ -1,6 +1,5 @@
 package com.example.todolist.taskTrack
 
-
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
@@ -8,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -25,7 +25,6 @@ class TaskTrackFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for this fragment
         val binding:FragmentTaskTrackBinding =DataBindingUtil.inflate(inflater, R.layout.fragment_task_track, container, false)
 
         val application= requireNotNull(this.activity).application
@@ -44,18 +43,19 @@ class TaskTrackFragment : Fragment() {
                            TransitionManager.beginDelayedTransition(id1, AutoTransition())
                            id.setVisibility(View.GONE)
                        }else{
+                           TransitionManager.beginDelayedTransition(id1)
                            TransitionManager.beginDelayedTransition(id1, AutoTransition())
                            id.setVisibility(View.VISIBLE)
                        }
         },
-        AddProgressListener{ initialValue ->
-
+        AddProgressListener{ id ->
+            taskTrackViewModel.addProgress(id)
         },
-        MinusProgressListener {initialValue ->
-
+        MinusProgressListener {id ->
+            taskTrackViewModel.minusProgress(id)
         },
-        DeleteTaskListener {id->
-
+        DeleteTaskListener { id->
+            taskTrackViewModel.deleteTodo(id)
         })
 
         binding.recyclerView.adapter=adapter
@@ -64,10 +64,21 @@ class TaskTrackFragment : Fragment() {
             Log.d("Size",it.size.toString())
             it?.let {
                 adapter.submitList(it)
-               adapter.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
+               }
+        })
+
+        taskTrackViewModel.deleteTodoId.observe(viewLifecycleOwner, Observer {
+            if(it==true){
+                Toast.makeText(application,"The task is delete successfully",Toast.LENGTH_LONG).show()
             }
         })
 
+        taskTrackViewModel.updateTodoId.observe(viewLifecycleOwner, Observer {
+            if(it!=null){
+                Toast.makeText(application,it.toString(),Toast.LENGTH_LONG).show()
+            }
+        })
 
         taskTrackViewModel.navigateToAddTasks.observe(viewLifecycleOwner, Observer{
             if(it==true){
@@ -78,5 +89,4 @@ class TaskTrackFragment : Fragment() {
 
         return binding.root
     }
-
 }

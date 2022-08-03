@@ -28,8 +28,8 @@ fun TextView.setProgressValue(item:TodoList?){
 @BindingAdapter("progressBar")
 fun LinearProgressIndicator.setProgressBarRange(item:TodoList?){
     item?.let{
-        max = Integer.valueOf(item.finalValue)
-        progress=Integer.valueOf(item.initialValue)
+        max = item.finalValue.toInt()
+        progress = item.initialValue.toInt()
     }
 }
 

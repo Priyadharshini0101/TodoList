@@ -49,19 +49,16 @@ class TaskClickListener(val clickListener: (view: ViewGroup,view1:ViewGroup) -> 
     fun onClick(view: ViewGroup,view1: ViewGroup)=clickListener(view,view1)
 }
 
-//class TaskClickListener(val clickListener: (todoId:TodoList) -> Unit){
-//    fun onClick(todoId: TodoList)=clickListener(todoId)
-//}
-class AddProgressListener(val clickListener: (initialValue:String) -> Unit){
-    fun onClick(model: TodoList)=clickListener(model.initialValue)
+class AddProgressListener(val clickListener: (todoList:TodoList) -> Unit){
+    fun onClick(todo: TodoList)=clickListener(todo)
 }
 
-class MinusProgressListener(val clickListener: (initialValue:String) -> Unit){
-    fun onClick(model: TodoList)=clickListener(model.initialValue)
+class MinusProgressListener(val clickListener: (todoList:TodoList) -> Unit){
+    fun onClick(todo: TodoList)=clickListener(todo)
 }
 
-class DeleteTaskListener(val clickListener: (todoId:Long) -> Unit){
-    fun onClick(model: TodoList)=clickListener(model.todoId)
+class DeleteTaskListener(val clickListener: (todoList:TodoList) -> Unit){
+    fun onClick(todo: TodoList)=clickListener(todo)
 }
 class TaskTrackDiffCallback : DiffUtil.ItemCallback<TodoList>() {
     override fun areItemsTheSame(oldItem: TodoList, newItem: TodoList): Boolean {
