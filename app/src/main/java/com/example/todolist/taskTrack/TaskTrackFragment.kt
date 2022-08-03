@@ -72,12 +72,14 @@ class TaskTrackFragment : Fragment() {
         taskTrackViewModel.deleteTodoId.observe(viewLifecycleOwner, Observer {
             if(it==true){
                 Toast.makeText(application,"The task is delete successfully",Toast.LENGTH_LONG).show()
+                taskTrackViewModel.doneDelete()
             }
         })
 
         taskTrackViewModel.updateTodoId.observe(viewLifecycleOwner, Observer {
             if(it!=null){
                 Toast.makeText(application,it.toString(),Toast.LENGTH_LONG).show()
+                taskTrackViewModel.doneUpdate()
             }
         })
 

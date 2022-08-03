@@ -23,8 +23,8 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
     val deleteTodoId: LiveData<Boolean>
         get()=_deleteTodoId
 
-    private var _updateTodoId= MutableLiveData<String>()
-    val updateTodoId: LiveData<String>
+    private var _updateTodoId= MutableLiveData<String?>()
+    val updateTodoId: LiveData<String?>
         get()=_updateTodoId
 
     fun navigateToAddTasks(){
@@ -48,10 +48,18 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
         }
     }
 
+    fun doneDelete(){
+        _deleteTodoId.value=false
+    }
+
     suspend fun update(todoList: TodoList){
         withContext(Dispatchers.IO){
             database.update(todoList)
         }
+    }
+
+    fun doneUpdate(){
+        _updateTodoId.value=null
     }
 
     fun addProgress(todoList:TodoList){

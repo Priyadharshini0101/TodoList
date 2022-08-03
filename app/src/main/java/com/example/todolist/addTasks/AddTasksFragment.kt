@@ -10,10 +10,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.todolist.R
 import com.example.todolist.database.TodoDatabase
 import com.example.todolist.database.TodoList
 import com.example.todolist.databinding.FragmentAddTasksBinding
+import com.example.todolist.taskTrack.TaskTrackFragmentDirections
 
 class AddTasksFragment : Fragment() {
      private var todoList: TodoList =TodoList()
