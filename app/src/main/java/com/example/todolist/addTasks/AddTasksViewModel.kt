@@ -20,8 +20,6 @@ class AddTasksViewModel(val database: TodoDatabaseDao, application: Application)
     val alert: LiveData<String?>
         get()=_alert
 
-
-
     suspend fun insert(todo:TodoList){
       withContext(Dispatchers.IO){
           database.insert(todo)
