@@ -10,8 +10,11 @@ import kotlinx.coroutines.withContext
 
 class UpdateTasksViewModel(val database: TodoDatabaseDao, application: Application,private val todoId:Long): AndroidViewModel(application) {
      var id:Long
-    private val todo = MediatorLiveData<TodoList>()
+
+     private val todo = MediatorLiveData<TodoList>()
+
     fun getTodo() = todo
+
     init{
         id=todoId
         todo.addSource(database.getNightWithId(id), todo::setValue)
