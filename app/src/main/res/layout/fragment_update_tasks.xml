@@ -7,10 +7,7 @@
         <variable
             name="updateTasksViewModel"
             type="com.example.todolist.updateTasks.UpdateTasksViewModel" />
-        <variable
-            name="data"
-            type="com.example.todolist.database.TodoList" />
-    </data>
+       </data>
 
            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/updates"
@@ -43,7 +40,7 @@
                     android:textSize="24sp"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
-                    app:taskName="@{data.taskName}"
+                    app:taskName="@{updateTasksViewModel.todo.taskName}"
                     app:layout_constraintStart_toStartOf="@id/left_well"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/progressValue"
@@ -55,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:padding="8dp"
-                    app:progressValue="@{data}"
+                    app:progressValue="@{updateTasksViewModel.todo}"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textSize="16sp"
@@ -70,7 +67,7 @@
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     app:trackThickness="16dp"
-                    app:progressBar="@{data}"
+                    app:progressBar="@{updateTasksViewModel.todo}"
                     android:layout_margin="16dp"
                     app:layout_constraintStart_toStartOf="@id/left_well"
                     app:layout_constraintTop_toBottomOf="@id/taskName"
@@ -141,6 +138,6 @@
                     app:layout_constraintEnd_toEndOf="@id/right_well"
                     app:layout_constraintStart_toEndOf="@id/deleteTask"
                     app:layout_constraintTop_toBottomOf="@id/progressBar" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+           </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

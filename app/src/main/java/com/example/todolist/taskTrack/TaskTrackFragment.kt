@@ -63,7 +63,7 @@ class TaskTrackFragment : Fragment() {
         taskTrackViewModel.navigateToUpdateTasks.observe(viewLifecycleOwner, Observer{
             if(it!=0L){
                 this.findNavController().navigate(TaskTrackFragmentDirections.actionTaskTrackFragmentToUpdateTasksFragment(it))
-                taskTrackViewModel.doneNavigateToAddTasks()
+                taskTrackViewModel.doneNavigateToUpdateTasks()
             }
         })
 

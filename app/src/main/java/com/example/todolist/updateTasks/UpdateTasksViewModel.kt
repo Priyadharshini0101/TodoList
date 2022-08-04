@@ -1,22 +1,21 @@
 package com.example.todolist.updateTasks
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.todolist.database.TodoDatabaseDao
 import com.example.todolist.database.TodoList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class UpdateTasksViewModel(val database: TodoDatabaseDao, application: Application,todoId:Long): AndroidViewModel(application) {
+class UpdateTasksViewModel(val database: TodoDatabaseDao, application: Application,private val todoId:Long): AndroidViewModel(application) {
      var id:Long
-
-     init{
+    private val todo = MediatorLiveData<TodoList>()
+    fun getTodo() = todo
+    init{
         id=todoId
-     }
+        todo.addSource(database.getNightWithId(id), todo::setValue)
+    }
 
     private var _deleteTodoId= MutableLiveData<Boolean>()
     val deleteTodoId: LiveData<Boolean>
@@ -91,3 +90,5 @@ class UpdateTasksViewModel(val database: TodoDatabaseDao, application: Applicati
         }
     }
 }
+
+
