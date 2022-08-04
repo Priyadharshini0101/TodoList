@@ -7,4 +7,7 @@
     <string name="click_to_add_new_tasks">Click to add new tasks</string>
     <string name="list_of_your_tasks">List of your tasks</string>
     <string name="add_tasks">Add Task</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_tasks">Update Tasks</string>
 </resources>

@@ -19,13 +19,11 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
     val navigateToAddTasks: LiveData<Boolean>
         get()=_navigateToAddTasks
 
-    private var _deleteTodoId= MutableLiveData<Boolean>()
-    val deleteTodoId: LiveData<Boolean>
-        get()=_deleteTodoId
+    private var _navigateToUpdateTasks= MutableLiveData<Long>()
+    val navigateToUpdateTasks: LiveData<Long>
+        get()=_navigateToUpdateTasks
 
-    private var _updateTodoId= MutableLiveData<String?>()
-    val updateTodoId: LiveData<String?>
-        get()=_updateTodoId
+
 
     fun navigateToAddTasks(){
         _navigateToAddTasks.value=true
@@ -35,65 +33,12 @@ class TaskTrackViewModel(val database: TodoDatabaseDao, application: Application
         _navigateToAddTasks.value=false
     }
 
-    suspend fun delete(todoList: TodoList){
-        withContext(Dispatchers.IO){
-            database.delete(todoList)
-        }
+    fun navigateToUpdateTasks(todoId:Long){
+     _navigateToUpdateTasks.value=todoId
     }
 
-    fun deleteTodo(todoList:TodoList){
-        viewModelScope.launch {
-            delete(todoList)
-            _deleteTodoId.value=true
-        }
+    fun doneNavigateToUpdateTasks(){
+        _navigateToUpdateTasks.value=0L
     }
 
-    fun doneDelete(){
-        _deleteTodoId.value=false
-    }
-
-    suspend fun update(todoList: TodoList){
-        withContext(Dispatchers.IO){
-            database.update(todoList)
-        }
-    }
-
-    fun doneUpdate(){
-        _updateTodoId.value=null
-    }
-
-    fun addProgress(todoList:TodoList){
-            viewModelScope.launch {
-                val str=todoList.initialValue.trim()
-                var initial =str.toInt()
-
-                val str1=todoList.finalValue.trim()
-                val final=str1.toInt()
-
-                if(initial<=final) {
-                    initial+=1
-                    todoList.initialValue=initial.toString()
-                    update(todoList)
-                    _updateTodoId.value="Your progress is updated"
-                }else{
-                    _updateTodoId.value="You have completed the task"
-                }
-            }
-    }
-
-    fun minusProgress(todoList:TodoList){
-        viewModelScope.launch {
-            val str=todoList.initialValue.trim()
-            var initial =str.toInt()
-
-            if(initial>0) {
-                initial-=1
-                todoList.initialValue=initial.toString()
-                update(todoList)
-                _updateTodoId.value="Your progress is updated"
-            }else{
-                _updateTodoId.value="You have not done any task yet"
-            }
-        }
-    }
 }

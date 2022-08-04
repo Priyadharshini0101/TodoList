@@ -39,53 +39,30 @@ class TaskTrackFragment : Fragment() {
         binding.taskTrackViewModel=taskTrackViewModel
         binding.lifecycleOwner = this
 
-        val adapter=TaskTrackAdapter(TaskClickListener{ id,id1->
-                       if(id.visibility== View.VISIBLE ){
-                           TransitionManager.beginDelayedTransition(id1, AutoTransition())
-                           id.setVisibility(View.GONE)
-                       }else{
-                           TransitionManager.beginDelayedTransition(id1)
-                           TransitionManager.beginDelayedTransition(id1, AutoTransition())
-                           id.setVisibility(View.VISIBLE)
-                       }
-        },
-        AddProgressListener{ id ->
-            taskTrackViewModel.addProgress(id)
-        },
-        MinusProgressListener {id ->
-            taskTrackViewModel.minusProgress(id)
-        },
-        DeleteTaskListener { id->
-            taskTrackViewModel.deleteTodo(id)
-        })
+       val adapter=TaskTrackAdapter(TaskClickListener { id ->
+                 taskTrackViewModel.navigateToUpdateTasks(id)
+       })
+
 
         binding.recyclerView.adapter=adapter
 
         taskTrackViewModel.todo.observe(viewLifecycleOwner, Observer {
-            Log.d("Size",it.size.toString())
             it?.let {
                 adapter.submitList(it)
                 adapter.notifyDataSetChanged()
                }
         })
 
-        taskTrackViewModel.deleteTodoId.observe(viewLifecycleOwner, Observer {
-            if(it==true){
-                Toast.makeText(application,"The task is delete successfully",Toast.LENGTH_LONG).show()
-                taskTrackViewModel.doneDelete()
-            }
-        })
-
-        taskTrackViewModel.updateTodoId.observe(viewLifecycleOwner, Observer {
-            if(it!=null){
-                Toast.makeText(application,it.toString(),Toast.LENGTH_LONG).show()
-                taskTrackViewModel.doneUpdate()
-            }
-        })
-
         taskTrackViewModel.navigateToAddTasks.observe(viewLifecycleOwner, Observer{
             if(it==true){
              this.findNavController().navigate(TaskTrackFragmentDirections.actionTaskTrackFragmentToAddTasksFragment())
+                taskTrackViewModel.doneNavigateToAddTasks()
+            }
+        })
+
+        taskTrackViewModel.navigateToUpdateTasks.observe(viewLifecycleOwner, Observer{
+            if(it!=0L){
+                this.findNavController().navigate(TaskTrackFragmentDirections.actionTaskTrackFragmentToUpdateTasksFragment(it))
                 taskTrackViewModel.doneNavigateToAddTasks()
             }
         })

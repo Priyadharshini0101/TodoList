@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="updateTasksViewModel"
+            type="com.example.todolist.updateTasks.UpdateTasksViewModel" />
+        <variable
+            name="data"
+            type="com.example.todolist.database.TodoList" />
+    </data>
+
+           <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/updates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/left_well"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="8dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/right_well"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="8dp" />
+
+                <TextView
+                    android:id="@+id/taskName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:textSize="24sp"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    app:taskName="@{data.taskName}"
+                    app:layout_constraintStart_toStartOf="@id/left_well"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/progressValue"
+                    tools:text="Learn Android"/>
+
+                <TextView
+                    android:id="@+id/progressValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:padding="8dp"
+                    app:progressValue="@{data}"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:background="@drawable/border"
+                    app:layout_constraintEnd_toEndOf="@id/right_well"
+                    app:layout_constraintStart_toEndOf="@id/taskName"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="12/25" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    app:trackThickness="16dp"
+                    app:progressBar="@{data}"
+                    android:layout_margin="16dp"
+                    app:layout_constraintStart_toStartOf="@id/left_well"
+                    app:layout_constraintTop_toBottomOf="@id/taskName"
+                    app:layout_constraintEnd_toEndOf="@id/right_well"/>
+
+                <com.google.android.material.button.MaterialButton
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="24dp"
+                    app:icon="@drawable/ic_baseline_remove_24"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    app:iconGravity="textStart"
+                    android:padding="0dp"
+                    app:iconPadding="0dp"
+                    android:onClick="@{()->updateTasksViewModel.minusProgress()}"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    android:id="@+id/minusInitialValue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/deleteTask"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="@id/left_well"
+                    app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/deleteTask"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="24dp"
+                    android:padding="0dp"
+                    app:iconPadding="0dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    android:onClick="@{()->updateTasksViewModel.deleteTodo()}"
+                    app:icon="@drawable/ic_baseline_delete_24"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/addInitialValue"
+                    app:layout_constraintStart_toEndOf="@id/minusInitialValue"
+                    app:layout_constraintTop_toBottomOf="@id/progressBar"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    app:iconGravity="textStart" />
+
+                <com.google.android.material.button.MaterialButton
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="24dp"
+                    android:padding="0dp"
+                    app:iconPadding="0dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    android:onClick="@{()->updateTasksViewModel.addProgress()}"
+                    app:icon="@drawable/ic_baseline_add_24"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    app:iconGravity="textStart"
+                    android:id="@+id/addInitialValue"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/right_well"
+                    app:layout_constraintStart_toEndOf="@id/deleteTask"
+                    app:layout_constraintTop_toBottomOf="@id/progressBar" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

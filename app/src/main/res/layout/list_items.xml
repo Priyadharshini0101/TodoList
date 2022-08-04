@@ -5,18 +5,8 @@
 
     <data>
         <variable
-            name="taskClicKListener"
+            name="taskClickListener"
             type="com.example.todolist.taskTrack.TaskClickListener" />
-        <variable
-            name="addProgressListener"
-            type="com.example.todolist.taskTrack.AddProgressListener" />
-        <variable
-            name="minusProgressListener"
-            type="com.example.todolist.taskTrack.MinusProgressListener" />
-        <variable
-            name="deleteTaskListener"
-            type="com.example.todolist.taskTrack.DeleteTaskListener" />
-
         <variable
             name="data"
             type="com.example.todolist.database.TodoList" />
@@ -31,19 +21,15 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="@{()-> taskClicKListener.onClick(hidden,card)}">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:onClick="@{()->taskClickListener.onClick(data)}"
+        android:layout_marginEnd="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fixed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -69,14 +55,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:textSize="20sp"
-                android:background="?attr/selectableItemBackground"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 app:taskName="@{data.taskName}"
                 app:layout_constraintStart_toStartOf="@id/left_well"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/progressValue"
-                tools:text="Learn Android" />
+                tools:text="Learn Android"/>
 
             <TextView
                 android:id="@+id/progressValue"
@@ -107,101 +92,6 @@
                 app:layout_constraintTop_toBottomOf="@id/taskName"
                 app:layout_constraintEnd_toEndOf="@id/right_well"/>
            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/hidden"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:visibility="gone"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fixed">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/left_well1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="8dp" />
-
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/right_well1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="8dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="8dp"
-                    app:icon="@drawable/ic_baseline_remove_24"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    app:iconGravity="textStart"
-                    android:padding="0dp"
-                    app:iconPadding="0dp"
-                    android:onClick="@{()->minusProgressListener.onClick(data)}"
-                    android:insetLeft="0dp"
-                    android:insetTop="0dp"
-                    android:insetRight="0dp"
-                    android:insetBottom="0dp"
-                    android:id="@+id/minusInitialValue"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/deleteTask"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintStart_toStartOf="@id/left_well1"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/deleteTask"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="8dp"
-                    android:padding="0dp"
-                    app:iconPadding="0dp"
-                    android:insetLeft="0dp"
-                    android:insetTop="0dp"
-                    android:insetRight="0dp"
-                    android:insetBottom="0dp"
-                    android:onClick="@{()->deleteTaskListener.onClick(data)}"
-                    app:icon="@drawable/ic_baseline_delete_24"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/addInitialValue"
-                    app:layout_constraintStart_toEndOf="@id/minusInitialValue"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    app:iconGravity="textStart" />
-
-                <com.google.android.material.button.MaterialButton
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="8dp"
-                    android:padding="0dp"
-                    app:iconPadding="0dp"
-                    android:insetLeft="0dp"
-                    android:insetTop="0dp"
-                    android:insetRight="0dp"
-                    android:insetBottom="0dp"
-                    android:onClick="@{()->addProgressListener.onClick(data)}"
-                    app:icon="@drawable/ic_baseline_add_24"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                    app:iconGravity="textStart"
-                    android:id="@+id/addInitialValue"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/right_well1"
-                    app:layout_constraintStart_toEndOf="@id/deleteTask"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 </layout>
 

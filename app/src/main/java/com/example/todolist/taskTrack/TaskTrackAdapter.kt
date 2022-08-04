@@ -1,5 +1,7 @@
 package com.example.todolist.taskTrack
 
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.transition.Visibility
 import com.example.todolist.database.TodoList
 import com.example.todolist.databinding.ListItemsBinding
@@ -10,12 +12,15 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.databinding.FragmentUpdateTasksBinding
 
-class TaskTrackAdapter(val clickListener1:TaskClickListener,val clickListener2:AddProgressListener,val clickListener3:MinusProgressListener,val clickListener4:DeleteTaskListener): ListAdapter<TodoList, TaskTrackAdapter.ViewHolder>(TaskTrackDiffCallback()) {
+class TaskTrackAdapter(val clickListener1: TaskClickListener): ListAdapter<TodoList, TaskTrackAdapter.ViewHolder>(TaskTrackDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item,clickListener1,clickListener2,clickListener3,clickListener4)
+        holder.bind(item,clickListener1)
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,13 +29,11 @@ class TaskTrackAdapter(val clickListener1:TaskClickListener,val clickListener2:A
 
     class ViewHolder private constructor(val binding: ListItemsBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: TodoList,clickListener1: TaskClickListener,clickListener2: AddProgressListener,clickListener3: MinusProgressListener,clickListener4: DeleteTaskListener) {
+        fun bind(item: TodoList,clickListener1: TaskClickListener) {
             binding.data=item
-            binding.taskClicKListener=clickListener1
-            binding.addProgressListener=clickListener2
-            binding.minusProgressListener=clickListener3
-            binding.deleteTaskListener=clickListener4
+            binding.taskClickListener=clickListener1
             binding.executePendingBindings()
+
         }
 
         companion object {
@@ -43,20 +46,8 @@ class TaskTrackAdapter(val clickListener1:TaskClickListener,val clickListener2:A
     }
 }
 
-class TaskClickListener(val clickListener: (view: ViewGroup,view1:ViewGroup) -> Unit){
-    fun onClick(view: ViewGroup,view1: ViewGroup)=clickListener(view,view1)
-}
-
-class AddProgressListener(val clickListener: (todoList:TodoList) -> Unit){
-    fun onClick(todo: TodoList)=clickListener(todo)
-}
-
-class MinusProgressListener(val clickListener: (todoList:TodoList) -> Unit){
-    fun onClick(todo: TodoList)=clickListener(todo)
-}
-
-class DeleteTaskListener(val clickListener: (todoList:TodoList) -> Unit){
-    fun onClick(todo: TodoList)=clickListener(todo)
+class TaskClickListener(val clickListener: (todoId:Long) -> Unit){
+    fun onClick(todo: TodoList)=clickListener(todo.todoId)
 }
 
 class TaskTrackDiffCallback : DiffUtil.ItemCallback<TodoList>() {
